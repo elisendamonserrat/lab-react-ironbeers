@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import allBeersImage from './../assets/beers.png'
 import randomBeerImage from './../assets/random-beer.png'
 import addNewBeerImage from './../assets/new-beer.png'
-import Header from '../components/Header';
 
 
 function HomePage() {
