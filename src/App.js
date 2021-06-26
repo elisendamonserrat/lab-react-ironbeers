@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import HomePage from './views/HomePage';
 import BeersPage from './views/BeersPage';
 import SingleBeerPage from './views/SingleBeerPage';
+import RandomBeerPage from './views/RandomBeerPage';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
     
     < Switch>
       <Route exact path="/" component={HomePage}/>
+      <Route exact path="/random-beer" component={RandomBeerPage}/>
       <Route exact path="/beers" component={BeersPage}/>
       <Route path="/beers/:beerId" component={SingleBeerPage}/>
     </Switch>

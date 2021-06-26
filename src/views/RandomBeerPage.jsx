@@ -1,48 +1,51 @@
 import React, { Component } from 'react'
 import Header from '../components/Header'
 import axios from 'axios';
-import BeerCard from '../components/BeerCard';
+import SingleBeerDetails from '../components/SingleBeerDetails';
 
 
-export class BeersPage extends Component {
+export class RandomBeerPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            beersList: [],
+            beerDetails: {},
             status: 'loading'
         }
     }
+
+    getRamdomBeer = (beerList) => {
+        return Math.floor(Math.random() * ((beerList.length - 1) - 0 + 1) + 0);
+    }
+
 
     componentDidMount = () => {
         axios
             .get("https://ih-beers-api2.herokuapp.com/beers")
             .then(response => {
+                const randomBeer = this.getRamdomBeer(response.data);
+
                 this.setState({
-                    beersList: response.data,
+                    beerDetails: response.data[randomBeer],
                     status: 'loaded'
                 })
             })
             .catch((e) => console.log(e))
     }
 
-
     render() {
-        const { beersList, status } = this.state;
+        const { beerDetails, status } = this.state;
 
         return (
             <>
              <Header />
              <main className="w-11/12 mx-auto">
                 { status === 'loading' && <p>Data is loading...</p>}
-                { status === 'loaded' && beersList.map((beer, index) => {
-                    return (
-                        < BeerCard  beerDetails={beer} key={index}/>
-                    )
-                })}
+                { status === 'loaded' && <SingleBeerDetails beerDetails={beerDetails} key={beerDetails._id} />} 
              </main>
             </>
         )
     }
 }
 
-export default BeersPage
+export default RandomBeerPage
+
