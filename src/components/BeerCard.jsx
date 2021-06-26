@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 
+
 function BeerCard(props) {
     const creatorNameCleaned = (creator) => {
         const symbol = creator.indexOf('<');

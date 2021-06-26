@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import HomePage from './views/HomePage';
 import BeersPage from './views/BeersPage';
+import SingleBeerPage from './views/SingleBeerPage';
 
 function App() {
   return (
@@ -9,9 +10,8 @@ function App() {
     
     < Switch>
       <Route exact path="/" component={HomePage}/>
-      <Route path="/beers" component={BeersPage}/>
-
-
+      <Route exact path="/beers" component={BeersPage}/>
+      <Route path="/beers/:beerId" component={SingleBeerPage}/>
     </Switch>
 
 
