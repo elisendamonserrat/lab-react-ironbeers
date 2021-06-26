@@ -4,11 +4,14 @@ import { Link } from 'react-router-dom';
 import allBeersImage from './../assets/beers.png'
 import randomBeerImage from './../assets/random-beer.png'
 import addNewBeerImage from './../assets/new-beer.png'
+import Header from '../components/Header';
 
 
 function HomePage() {
     return (
-        <main>
+        <>
+        <Header />
+        <main className="w-11/12 mx-auto">
             <section className="border w-full my-2">
                 <Link to='/beers'>
                     <img className="w-full object-contain h-1/4" src={allBeersImage} alt="All beers list" />
@@ -34,6 +37,7 @@ function HomePage() {
                 </Link>
             </section>
         </main>
+        </>
     )
 }
 

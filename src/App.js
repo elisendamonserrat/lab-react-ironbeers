@@ -5,7 +5,7 @@ import HomePage from './views/HomePage';
 
 function App() {
   return (
-    <div className="w-11/12 mx-auto">
+    <div>
     
     < Switch>
       <Route exact path="/" component={HomePage}/>
