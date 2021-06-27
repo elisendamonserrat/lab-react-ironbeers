@@ -4,6 +4,7 @@ import HomePage from './views/HomePage';
 import BeersPage from './views/BeersPage';
 import SingleBeerPage from './views/SingleBeerPage';
 import RandomBeerPage from './views/RandomBeerPage';
+import NewBeerPage from './views/NewBeerPage'
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
     
     < Switch>
       <Route exact path="/" component={HomePage}/>
-      <Route exact path="/random-beer" component={RandomBeerPage}/>
+      <Route  path="/random-beer" component={RandomBeerPage}/>
+      <Route  path="/new-beer" component={NewBeerPage}/>
       <Route exact path="/beers" component={BeersPage}/>
       <Route path="/beers/:beerId" component={SingleBeerPage}/>
     </Switch>
