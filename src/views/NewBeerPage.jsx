@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import axios from 'axios';
 
@@ -14,6 +15,7 @@ export class NewBeerPage extends Component {
             brewers_tips: '',
             attenuation_level : Number(''),
             contributed_by: '',
+            newBeerAdded: false,
         }
 
     }
@@ -26,13 +28,43 @@ export class NewBeerPage extends Component {
         })
     }
 
+    handleAddBeer = (event) => {
+        event.preventDefault();
+        const newBeer = {...this.state};
+
+        this.setState({
+            newBeerAdded: 'on process',
+        })
+        
+        axios
+            .post('https://ih-beers-api2.herokuapp.com/beers/new', newBeer)
+            .then(() => {
+                console.log('new beer has been added', newBeer)
+                this.setState({
+                    newBeerAdded: true,
+                })
+            })
+            .catch(error => console.log(error))
+    }
+
     render() {
-        const { name, tagline, description, first_brewed, brewers_tips, attenuation_level, contributed_by } = this.state;
+        const { name, tagline, description, first_brewed, brewers_tips, attenuation_level, contributed_by, newBeerAdded } = this.state;
         return (
          <>
             <Header />
             <main className="w-11/12 mx-auto">
-                <form action="" method="post" className="my-4 mx-2 w-full">
+                { newBeerAdded === 'on process' && <p className="text-center text-lg my-8 mx-4 ">Your beer is being added to the list. Thanks for contribuiting <span role='img' aria-label="clinking beer mugs">🍻</span></p>}
+                
+                { newBeerAdded === true && 
+                    <div className="flex flex-col items-center">
+                     <p className="text-center text-lg my-8 mx-auto">Your beer has been <strong>successfully added</strong><span role='img' aria-label="clinking beer mugs">🍻</span></p>
+                     <button className="bg-blue-500 rounded-md px-1 py-2 uppercase w-5/6 text-center text-white font-bold mb-5"><Link to='/'>Go to Home Page</Link></button>
+                     <button className="bg-blue-500 rounded-md px-1 py-2 uppercase w-5/6 text-center text-white font-bold"><Link to='/new-beer'>Add a New Beer</Link></button>
+                    </div>
+                }
+
+                { newBeerAdded === false && 
+                <form className="my-4 mx-2 w-full">
                     <label htmlFor="name" className="font-semibold uppercase">Name</label>
                     <br></br>
                     <input 
@@ -122,12 +154,13 @@ export class NewBeerPage extends Component {
                     <button 
                         type="submit"
                         className="bg-blue-500 rounded-md px-1 py-2 uppercase w-5/6 text-center"
+                        onClick={this.handleAddBeer}
                     > 
                     Add new 
                     </button>
                     
                 </form>
-
+            }
             </main>
         </>
         )
